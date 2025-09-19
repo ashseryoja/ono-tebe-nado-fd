@@ -5,7 +5,8 @@
 }
 
 body {
-  width: 1100px;
+  width: 100%;
+  max-width: 1100px;
   margin: 0 auto;
   font-family: Raleway, sans-serif;
 }
@@ -36,3 +37,17 @@ img {
 button {
   font: inherit;
 }
+
+/* Smooth hover transitions for links and buttons */
+a,
+button {
+  transition: color .2s ease, background-color .2s ease,
+              border-color .2s ease, opacity .2s ease,
+              transform .15s ease;
+}
+
+a:hover { opacity: .8; }
+a:active { opacity: .6; }
+
+/* Contact links */
+.address__link:hover { text-decoration: underline; text-underline-offset: 3px; }
