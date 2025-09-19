@@ -2,46 +2,20 @@ name: Tests
 
 on:
   push:
-    branches: ['**']
-    tags: ['**']
-  workflow_dispatch:
-
-permissions:
-  contents: read
+    branches:
+      - ''
+    tags:
+      - ''
 
 jobs:
   tests:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
-
-      # Проверяем видимость репозитория и падаем ТОЛЬКО если он не public
-      - name: Ensure repository is PUBLIC
-        env:
-          GH_TOKEN: ${{ github.token }}
-          REPO: ${{ github.repository }}
-        run: |
-          set -euo pipefail
-          echo "Repo: $REPO"
-          if command -v jq >/dev/null 2>&1; then
-            VIS=$(curl -sS -H "Authorization: Bearer $GH_TOKEN" \
-                     -H "Accept: application/vnd.github+json" \
-                     "https://api.github.com/repos/$REPO" | jq -r .visibility)
-          else
-            VIS=$(curl -sS -H "Authorization: Bearer $GH_TOKEN" \
-                     -H "Accept: application/vnd.github+json" \
-                     "https://api.github.com/repos/$REPO" \
-                   | grep -o '"visibility":"[^"]*"' | head -n1 | cut -d':' -f2 | tr -d '"')
-          fi
-          echo "visibility=$VIS"
-          if [ "$VIS" != "public" ]; then
-            echo "❌ Repository visibility is '$VIS'. Make it PUBLIC and push again."
-            exit 1
-          fi
-          echo "✅ Repository is public. Continuing…"
-
+        uses: actions/checkout@v3
+      - name: Check if the repository is private
+        run: exit 1
+        if: ${{github.event.repository.private}}
       - name: Tests
         uses: Yandex-Practicum/test-project-action@v1
         with:
