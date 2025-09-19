@@ -12,16 +12,29 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
-      - name: Check repository visibility (fail if private)
+      # ✅ Надёжная проверка через GitHub API
+      - name: Ensure repository is PUBLIC
+        env:
+          GH_TOKEN: ${{ github.token }}          # токен runner'а
         run: |
-          echo "visibility=${{ github.event.repository.visibility }}"
-          echo "private=${{ github.event.repository.private }}"
-          if [ "${{ github.event.repository.private }}" = "true" ]; then
-            echo "Repository is private. Make it public to pass."
+          set -eu
+          echo "Repo: ${{ github.repository }}"
+          # gh обычно предустановлен на ubuntu-latest; если нет — используем curl
+          if command -v gh >/dev/null 2>&1; then
+            VIS=$(gh api repos/${{ github.repository }} --jq .visibility)
+          else
+            VIS=$(curl -s -H "Authorization: Bearer $GH_TOKEN" \
+                  https://api.github.com/repos/${{ github.repository }} \
+                  | grep -o '"visibility":"[^"]*"' | head -n1 | cut -d':' -f2 | tr -d '"')
+          fi
+          echo "visibility=$VIS"
+          if [ "$VIS" != "public" ]; then
+            echo "❌ Repository visibility is '$VIS'. Make it PUBLIC and push again."
             exit 1
           fi
+          echo "✅ Repository is public. Continuing…"
 
       - name: Tests
         uses: Yandex-Practicum/test-project-action@v1
