@@ -1,0 +1,48 @@
+@font-face {
+  font-family: Raleway;
+  src:
+    url(../fonts/Raleway-Regular.woff2) format('woff2'),
+    url(../fonts/Raleway-Regular.woff) format('woff');
+  font-weight: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: Raleway;
+  src:
+    url(../fonts/Raleway-Bold.woff2) format('woff2'),
+    url(../fonts/Raleway-Bold.woff) format('woff');
+  font-weight: bold;
+  font-display: swap;
+}
+
+/* Common utility classes */
+.overlay {
+  position: absolute;
+  background-color: rgb(0 0 0 / 0.6);
+  inset: 0;
+}
+
+.no-overlay {
+  position: relative;
+}
+
+/* Text alignment utilities */
+.aligned-text {
+  display: block;
+  letter-spacing: 30px;
+}
+
+.aligned-text_center {
+  text-align: center;
+  line-height: 1.5;
+}
+
+.aligned-text_right {
+  text-align: right;
+}
+
+.no-letter-spacing {
+  letter-spacing: 0;
+}
+
