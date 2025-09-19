@@ -2,32 +2,38 @@ name: Tests
 
 on:
   push:
-    branches:
-      - '**'
-    tags:
-      - '**'
+    branches: ['**']
+    tags: ['**']
+  workflow_dispatch:
+
+permissions:
+  contents: read
 
 jobs:
   tests:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # ✅ Надёжная проверка через GitHub API
+      # Проверяем видимость репозитория и падаем ТОЛЬКО если он не public
       - name: Ensure repository is PUBLIC
         env:
-          GH_TOKEN: ${{ github.token }}          # токен runner'а
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
         run: |
-          set -eu
-          echo "Repo: ${{ github.repository }}"
-          # gh обычно предустановлен на ubuntu-latest; если нет — используем curl
-          if command -v gh >/dev/null 2>&1; then
-            VIS=$(gh api repos/${{ github.repository }} --jq .visibility)
+          set -euo pipefail
+          echo "Repo: $REPO"
+          if command -v jq >/dev/null 2>&1; then
+            VIS=$(curl -sS -H "Authorization: Bearer $GH_TOKEN" \
+                     -H "Accept: application/vnd.github+json" \
+                     "https://api.github.com/repos/$REPO" | jq -r .visibility)
           else
-            VIS=$(curl -s -H "Authorization: Bearer $GH_TOKEN" \
-                  https://api.github.com/repos/${{ github.repository }} \
-                  | grep -o '"visibility":"[^"]*"' | head -n1 | cut -d':' -f2 | tr -d '"')
+            VIS=$(curl -sS -H "Authorization: Bearer $GH_TOKEN" \
+                     -H "Accept: application/vnd.github+json" \
+                     "https://api.github.com/repos/$REPO" \
+                   | grep -o '"visibility":"[^"]*"' | head -n1 | cut -d':' -f2 | tr -d '"')
           fi
           echo "visibility=$VIS"
           if [ "$VIS" != "public" ]; then
