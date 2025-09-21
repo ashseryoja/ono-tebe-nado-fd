@@ -69,8 +69,12 @@ header {
     line-height: 1.1;
 }
 
-.header-link_active { text-decoration: none; }
-.header-links-list-item_no-bullit { list-style: none; }
+.header-link_active {
+  text-decoration: none;
+}
+.header-links-list-item_no-bullit {
+  list-style: none;
+}
 
 .address {
   display: flex;
@@ -120,6 +124,7 @@ header {
   font-size: 100px;
   color: #fff;
   margin-bottom: 106px;
+  text-transform: uppercase;
 }
 
 .description {
@@ -370,10 +375,6 @@ footer {
 
 @media (max-width: 768px) {
     header { display: flex; align-items: center; justify-content: center; padding: 16px 12px; position: relative; min-height: 120px; }
-    .header-menu { display: none; }
-    .header-address { display: none; }
-    .header-burger { display: inline-block; margin-right: auto; }
-    .header-logo { position: absolute; left: 50%; transform: translateX(-50%); }
     .header-logo-image { width: 120px; min-height: auto; }
     
     .cover {
