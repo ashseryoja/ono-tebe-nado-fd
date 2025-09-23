@@ -272,7 +272,7 @@
 /* Footer styles */
 .footer {
   display: grid;
-  padding: 0px 34px 50px 50px;
+  padding: 0px 34px 82px 50px;
   background-color: #fff;
   grid-template-columns: 1fr 1fr 1fr;
   font-size: 18px;
