@@ -222,7 +222,6 @@
   margin: 30px 0 0 40px;
 }
 
-/* About styles */
 .about {
   display: grid;
   margin: 0 24px 180px 24px;
@@ -425,4 +424,3 @@
         justify-self: center;
     }
 }
-
