@@ -33,7 +33,7 @@
     display: grid;
     grid-template-columns: 1fr min-content 1fr;
     align-items: center;
-    padding: 93px 34px 93px 50px;
+    padding: 90px 44px 92px 48px;
     background-color: #fff;
     font-size: 18px;
 }
@@ -94,12 +94,12 @@
 /* Cover styles */
 .cover {
   position: relative;
-  margin-bottom: 180px;
+  margin-bottom: 179px;
   background-image: url(../images/cover.jpg);
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
-  padding: 165px 35px 48px 49px;
+  padding: 162px 46px 45px 49px;
 }
 
 .cover-title {
@@ -141,7 +141,7 @@
 
 /* Lots styles */
 .lots {
-  margin: 0 9px 120px 24px;
+  margin: 0 21px 120px 24px;
   background-color: #fff;
   font-weight: normal;
   font-size: 100%;
@@ -160,7 +160,7 @@
   list-style: none;
 }
 .lots-card-list-item {
-  min-height: 596px;
+  min-height: 588px;
   font-weight: normal;
   font-size: 100%;
   font-family: Raleway, sans-serif;
@@ -200,7 +200,7 @@
   background-image: url(../images/card-lot-03.jpg);
 }
 .card-title {
-  margin: 48px 40px 0;
+  margin: 48px 38px 0;
   font-size: 22px;
   text-decoration: underline;
   text-transform: uppercase;
@@ -219,12 +219,12 @@
   text-decoration: none;
   border-bottom: 1px solid;
   font-size: 20px;
-  margin: 30px 0 0 40px;
+  margin: 32px 0 0 40px;
 }
 
 .about {
   display: grid;
-  margin: 0 24px 180px 24px;
+  margin: 0 24px 174px 24px;
   background-color: #fff;
   grid-template-columns: 1fr auto;
   gap: 72px;
@@ -233,7 +233,7 @@
 .about-column-logo {
   display: flex;
   justify-content: center;
-  padding: 34px 0px 0px 47px;
+  padding: 30px 0px 0px 45px;
 }
 .about-logo {
   display: flex;
@@ -249,11 +249,11 @@
 }
 .about-column-text {
   padding-bottom: 3px;
-  margin-top: 137px;
+  margin-top: 131px;
   line-height: 1.2;
 }
 .about-title {
-  margin-bottom: 100px;
+  margin-bottom: 96px;
   text-transform: uppercase;
   font-size: 40px;
 }
